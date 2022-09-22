@@ -13,6 +13,12 @@ import RPi.GPIO as GPIO
 BEACON_TEXT = 'LoRa Beacon'
 BEACON_FREQ = 915.00
 
+# New message indicator
+new_msg_recv = False
+
+# Time to wait for clear frequency in sec (should be ~30)
+freq_clear_time = 30
+
 # Set up buttons for use
 # Button A
 btnA = DigitalInOut(board.D5)
@@ -64,14 +70,6 @@ rfm9x.spread_factor = 12
 rfm9x.code_rate = 8
 rfm9x.destination = 0xff
 
-# New message indicator
-new_msg_recv = False
-
-# Time to wait for clear frequency in sec (should be ~30)
-freq_clear_time = 30
-
-os.chdir('/home/pi/Documents/lora_beacon')
-
 def show_status(message):
     global new_msg_rev
     display.fill(0)
@@ -85,9 +83,9 @@ def show_status(message):
 
 # Main beacon loop
 def beacon_loop():
+    global new_msg_recv
 
     print('--- LoRa Beacon Ready---')
-    global new_msg_recv
 
     while True:
 
