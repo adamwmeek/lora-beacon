@@ -137,7 +137,8 @@ def clear_freq():
         else:
             freq_clear = True
 
-print('Starting LoRa Beacon')
-clear_freq()
-beacon_loop()
+if __name__ == '__main__':
+    print('Starting LoRa Beacon')
+    clear_freq()
+    beacon_loop()
 
