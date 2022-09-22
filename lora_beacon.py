@@ -51,6 +51,11 @@ GPIO.output(board.D25, 0)
 CS = DigitalInOut(board.CE1)
 RESET = DigitalInOut(board.D25)
 
+RESET.switch_to_output()
+RESET.value = False
+time.sleep(0.01)
+RESET.value = True
+
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, BEACON_FREQ)
 rfm9x.high_power = True
