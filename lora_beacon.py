@@ -8,6 +8,7 @@ import board
 import adafruit_ssd1306
 import adafruit_rfm9x
 import os
+import RPi.GPIO as GPIO
 
 BEACON_TEXT = 'LoRa Beacon'
 BEACON_FREQ = 915.00
@@ -42,8 +43,14 @@ width = display.width
 height = display.height
 
 # Configure LoRa Radio
+GPIO.setup(board.D25, GPIO.OUT)
+GPIO.output(board.D25, 0)
+time.sleep(0.01)
+GPIO.output(board.D25, 0)
+
 CS = DigitalInOut(board.CE1)
 RESET = DigitalInOut(board.D25)
+
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, BEACON_FREQ)
 rfm9x.high_power = True
