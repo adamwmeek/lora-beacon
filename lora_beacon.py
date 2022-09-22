@@ -125,7 +125,7 @@ def clear_freq():
     while not freq_clear:
 
         show_status('Clearing freq...')
-        print('Clearning frequency...')
+        print('Clearing frequency...')
 
         packet = rfm9x.receive(timeout=freq_clear_time)
 
